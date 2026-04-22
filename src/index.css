@@ -218,3 +218,37 @@ body {
     opacity: 0;
   }
 }
+
+/* Hero headline glow */
+.hero-glow {
+  text-shadow:
+    0 0 20px rgba(112, 66, 20, 0.6),
+    0 0 60px rgba(112, 66, 20, 0.3),
+    0 0 120px rgba(112, 66, 20, 0.15);
+}
+
+/* Name reveal glow */
+.name-glow {
+  text-shadow:
+    0 0 10px rgba(74, 222, 128, 0.8),
+    0 0 30px rgba(74, 222, 128, 0.4);
+}
+
+/* CTA pulsing border glow */
+@keyframes cta-glow-pulse {
+  0%, 100% {
+    box-shadow:
+      0 0 8px rgba(112, 66, 20, 0.4),
+      0 0 20px rgba(85, 107, 47, 0.2);
+  }
+  50% {
+    box-shadow:
+      0 0 16px rgba(112, 66, 20, 0.8),
+      0 0 40px rgba(85, 107, 47, 0.4),
+      0 0 80px rgba(112, 66, 20, 0.2);
+  }
+}
+
+.cta-pulse {
+  animation: cta-glow-pulse 2.4s ease-in-out infinite;
+}
