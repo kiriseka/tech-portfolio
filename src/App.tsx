@@ -24,7 +24,7 @@ const App = () => {
                 <Menu size={24} />
             </button>
 
-            <div className="flex flex-col gap-12 md:gap-20 pb-20">
+            <div className="flex flex-col gap-5 md:gap-5 pb-20">
                 <Hero />
                 <ProjectGrid />
                 <SkillNodeMap />

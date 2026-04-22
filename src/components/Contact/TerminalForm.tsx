@@ -2,19 +2,48 @@ import { useState } from 'react';
 import { Send, Terminal } from 'lucide-react';
 import { motion } from 'framer-motion';
 
+const BOT_TOKEN = import.meta.env.VITE_TELEGRAM_BOT_TOKEN;
+const CHAT_ID = import.meta.env.VITE_TELEGRAM_CHAT_ID;
+
 const TerminalForm = () => {
     const [formData, setFormData] = useState({
         name: '',
+        email: '',
         comp: '',
         msg: ''
     });
-    const [status, setStatus] = useState<'idle' | 'sending' | 'sent'>('idle');
+    const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setStatus('sending');
-        // Simulate network request
-        setTimeout(() => setStatus('sent'), 1500);
+
+        const text =
+            `📡 *New Transmission from Portfolio!*\n\n` +
+            `👤 *Name:* ${formData.name}\n` +
+            `📧 *Email:* ${formData.email}\n` +
+            `🏢 *Company:* ${formData.comp || '—'}\n` +
+            `💬 *Message:*\n${formData.msg}`;
+
+        try {
+            const res = await fetch(
+                `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`,
+                {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        chat_id: CHAT_ID,
+                        text,
+                        parse_mode: 'Markdown',
+                    }),
+                }
+            );
+
+            if (!res.ok) throw new Error('Telegram API error');
+            setStatus('sent');
+        } catch {
+            setStatus('error');
+        }
     };
 
     return (
@@ -43,10 +72,26 @@ const TerminalForm = () => {
                         <p>TRANSMISSION RECEIVED.</p>
                         <p className="text-xs mt-2 opacity-50">Expect response within 24-48 cycles.</p>
                         <button
-                            onClick={() => { setStatus('idle'); setFormData({ name: '', comp: '', msg: '' }); }}
+                            onClick={() => { setStatus('idle'); setFormData({ name: '', email: '', comp: '', msg: '' }); }}
                             className="mt-8 text-xs underline hover:text-white"
                         >
                             [RESET_SIGNAL]
+                        </button>
+                    </motion.div>
+                ) : status === 'error' ? (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        className="text-center py-12 text-red-400 relative z-10"
+                    >
+                        <div className="text-4xl mb-4">✗</div>
+                        <p>TRANSMISSION FAILED.</p>
+                        <p className="text-xs mt-2 opacity-50">Signal lost. Check connection and retry.</p>
+                        <button
+                            onClick={() => setStatus('idle')}
+                            className="mt-8 text-xs underline hover:text-white"
+                        >
+                            [RETRY_SIGNAL]
                         </button>
                     </motion.div>
                 ) : (
@@ -60,7 +105,21 @@ const TerminalForm = () => {
                                 type="text"
                                 value={formData.name}
                                 onChange={e => setFormData({ ...formData, name: e.target.value })}
-                                placeholder="> Enter identifier..."
+                                placeholder="> Enter name..."
+                                className="w-full bg-[rgba(255,255,255,0.05)] border-b-2 border-[var(--color-charcoal)] px-4 py-4 text-white font-bold tracking-wide focus:outline-none focus:border-[#a6e22e] focus:bg-[rgba(255,255,255,0.1)] transition-all placeholder:text-gray-500"
+                            />
+                        </div>
+
+                        <div className="group">
+                            <label className="block text-[#a6e22e] text-sm font-bold mb-2 group-focus-within:text-white transition-all">
+                                // EMAIL_ADDRESS
+                            </label>
+                            <input
+                                required
+                                type="text"
+                                value={formData.email}
+                                onChange={e => setFormData({ ...formData, email: e.target.value })}
+                                placeholder="> Enter email..."
                                 className="w-full bg-[rgba(255,255,255,0.05)] border-b-2 border-[var(--color-charcoal)] px-4 py-4 text-white font-bold tracking-wide focus:outline-none focus:border-[#a6e22e] focus:bg-[rgba(255,255,255,0.1)] transition-all placeholder:text-gray-500"
                             />
                         </div>
@@ -95,7 +154,7 @@ const TerminalForm = () => {
                         <button
                             type="submit"
                             disabled={status === 'sending'}
-                            className="w-full bg-[#a6e22e] text-black font-bold py-5 hover:bg-white hover:scale-[1.02] transition-all flex justify-center items-center space-x-2 group shadow-lg"
+                            className="w-full bg-[#a6e22e] text-black font-bold py-5 hover:bg-white hover:scale-[1.02] transition-all flex justify-center items-center space-x-2 group shadow-lg disabled:opacity-60 disabled:cursor-not-allowed disabled:scale-100"
                         >
                             {status === 'sending' ? (
                                 <span className="animate-pulse">TRANSMITTING...</span>
