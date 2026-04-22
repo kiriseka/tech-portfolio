@@ -24,12 +24,14 @@ const App = () => {
                 <Menu size={24} />
             </button>
 
-            <Hero />
-            <ProjectGrid />
-            <SkillNodeMap />
-            <LogEntry />
-            <Publication />
-            <TerminalForm />
+            <div className="flex flex-col gap-12 md:gap-20 pb-20">
+                <Hero />
+                <ProjectGrid />
+                <SkillNodeMap />
+                <LogEntry />
+                <Publication />
+                <TerminalForm />
+            </div>
         </TerminalLayout>
     )
 }

@@ -129,7 +129,7 @@ const ProjectGrid = () => {
     }, [selectedId]);
 
     return (
-        <section id="artifacts" className="py-20 max-w-7xl mx-auto">
+        <section id="artifacts" className="py-32 md:py-48 max-w-7xl mx-auto">
             <div className="flex items-center mb-12">
                 <span className="font-mono text-[var(--color-sepia)] mr-4">02.</span>
                 <h2 className="text-3xl font-bold tracking-tighter text-white">Artifacts</h2>

@@ -177,7 +177,7 @@ const Scene = () => {
 
 const SkillNodeMap = () => {
     return (
-        <section className="py-20 max-w-7xl mx-auto min-h-[600px] relative overflow-hidden">
+        <section className="py-32 md:py-48 max-w-7xl mx-auto min-h-[600px] relative overflow-hidden">
             <div className="flex items-center mb-4 px-6 md:px-0">
                 <span className="font-mono text-[var(--color-sepia)] mr-4">03.</span>
                 <h2 className="text-3xl font-bold tracking-tighter text-white">Toolkit (Neural Net)</h2>

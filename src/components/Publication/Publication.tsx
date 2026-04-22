@@ -39,7 +39,7 @@ const publications: PublicationItem[] = [
 
 const Publication = () => {
     return (
-        <section id="publication" className="py-20 max-w-7xl mx-auto">
+        <section id="publication" className="py-32 md:py-48 max-w-7xl mx-auto">
             {/* Section Header */}
             <div className="flex items-center mb-12">
                 <span className="font-mono text-[var(--color-sepia)] mr-4">05.</span>
