@@ -62,7 +62,7 @@ const projects: Project[] = [
         description: 'Landing page for personal portfolio. Engineered with modern web technologies to showcase professional profile and skills.',
         tech: ['HTML', 'CSS', 'JavaScript'],
         icon: <Globe size={40} className="text-[var(--color-sepia)]" />,
-        demo: 'https://milaseptiyah.my.id',
+        demo: 'https://www.milaseptiyah.my.id',
         image: personalLandingPageImage,
         // github: 'https://github.com/kiriseka/laravel-live-chat-app',
     },

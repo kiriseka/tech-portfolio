@@ -7,6 +7,7 @@ import ProjectGrid from './components/Projects/ProjectGrid';
 import SkillNodeMap from './components/Skills/SkillNodeMap';
 import LogEntry from './components/Log/LogEntry';
 import TerminalForm from './components/Contact/TerminalForm';
+import Publication from './components/Publication/Publication';
 
 const App = () => {
     const [isPaletteOpen, setIsPaletteOpen] = useState(false);
@@ -27,6 +28,7 @@ const App = () => {
             <ProjectGrid />
             <SkillNodeMap />
             <LogEntry />
+            <Publication />
             <TerminalForm />
         </TerminalLayout>
     )
