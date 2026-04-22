@@ -38,7 +38,7 @@ const Hero = () => {
     }, []);
 
     return (
-        <section className="min-h-[80vh] flex flex-col justify-center items-start pt-20">
+        <section className="min-h-screen flex flex-col justify-center items-start">
 
             {/* Terminal Header */}
             <div className="flex items-center space-x-2 text-[var(--color-olive)] mb-6 opacity-80 font-mono text-sm">
@@ -96,7 +96,11 @@ const Hero = () => {
             <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="group relative px-6 py-3 bg-[var(--color-charcoal)] border border-[var(--color-text-main)] overflow-hidden"
+                onClick={() => {
+                    const el = document.getElementById('artifacts');
+                    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }}
+                className="group relative px-6 py-3 bg-[var(--color-charcoal)] border border-[var(--color-text-main)] overflow-hidden cursor-pointer"
             >
                 <span className="relative z-10 flex items-center space-x-2 font-mono text-sm tracking-widest uppercase">
                     <span>Initialize Process</span>
