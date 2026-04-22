@@ -23,11 +23,21 @@ const CommandPalette = ({ isOpen, setIsOpen }: CommandPaletteProps) => {
     }, [isOpen, setIsOpen]);
 
     const menuItems = [
-        { id: 'projects', label: 'Access Artifacts', sub: 'View Projects', icon: 'P' },
+        { id: 'artifacts', label: 'Access Artifacts', sub: 'View Projects', icon: 'P' },
         { id: 'skills', label: 'System Diagnostics', sub: 'View Skills', icon: 'S' },
         { id: 'log', label: 'Read Logs', sub: 'About Me', icon: 'L' },
+        { id: 'publication', label: 'Publications', sub: 'Research & Writing', icon: 'R' },
         { id: 'contact', label: 'Transmit Signal', sub: 'Contact', icon: 'T' },
     ];
+
+    const scrollToSection = (id: string) => {
+        setIsOpen(false);
+        setQuery('');
+        setTimeout(() => {
+            const el = document.getElementById(id);
+            if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 150);
+    };
 
     const filteredItems = menuItems.filter(item =>
         item.label.toLowerCase().includes(query.toLowerCase()) ||
@@ -76,7 +86,11 @@ const CommandPalette = ({ isOpen, setIsOpen }: CommandPaletteProps) => {
                                 filteredItems.map((item) => (
                                     <div
                                         key={item.id}
-                                        className="group flex items-center px-4 py-3 mx-2 my-1 cursor-pointer hover:bg-[var(--color-sepia)] hover:bg-opacity-20 transition-colors"
+                                        onClick={() => scrollToSection(item.id)}
+                                        onKeyDown={(e) => e.key === 'Enter' && scrollToSection(item.id)}
+                                        tabIndex={0}
+                                        role="button"
+                                        className="group flex items-center px-4 py-3 mx-2 my-1 cursor-pointer hover:bg-[var(--color-sepia)] hover:bg-opacity-20 transition-colors focus:outline-none focus:bg-[var(--color-sepia)] focus:bg-opacity-20"
                                     >
                                         <div className="w-8 h-8 flex items-center justify-center border border-[var(--color-text-main)] border-opacity-30 text-xs font-mono mr-4 group-hover:border-[var(--color-olive)] group-hover:text-[var(--color-olive)] transition-colors">
                                             {item.icon}

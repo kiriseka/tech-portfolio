@@ -37,7 +37,7 @@ const logs: Log[] = [
 
 const LogEntry = () => {
     return (
-        <section className="py-32 md:py-48 max-w-4xl mx-auto px-6">
+        <section id="log" className="py-32 md:py-48 max-w-4xl mx-auto px-6">
             <div className="flex items-center mb-16">
                 <span className="font-mono text-[var(--color-sepia)] mr-4">04.</span>
                 <h2 className="text-3xl font-bold tracking-tighter text-white">System Logs</h2>

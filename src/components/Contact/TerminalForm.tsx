@@ -47,7 +47,7 @@ const TerminalForm = () => {
     };
 
     return (
-        <section className="py-32 md:py-48 max-w-2xl mx-auto px-6 mb-20 md:mb-32">
+        <section id="contact" className="py-32 md:py-48 max-w-2xl mx-auto px-6 mb-20 md:mb-32">
             <div className="flex items-center mb-12">
                 <span className="font-mono text-[var(--color-sepia)] mr-4">06.</span>
                 <h2 className="text-3xl font-bold tracking-tighter text-white">Transmission</h2>
