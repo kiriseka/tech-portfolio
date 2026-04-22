@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-type Trigger = 'sudo' | 'hack' | 'matrix' | 'konami';
+type Trigger = 'sudo' | 'hack' | 'matrix' | 'konami' | 'got' | 'marvel';
 
 const MESSAGES: Record<Trigger, { title: string; lines: string[] }> = {
     sudo: {
@@ -59,10 +59,35 @@ const MESSAGES: Record<Trigger, { title: string; lines: string[] }> = {
             'Thanks for playing 🎮',
         ],
     },
+    got: {
+        title: 'WINTER IS COMING',
+        lines: [
+            'The night is dark and full of bugs.',
+            '',
+            '"A developer always pays his debts."',
+            '- House Lannister of Tech',
+            '',
+            'Hold the door...',
+            '',
+            '❄ THE NORTH REMEMBERS 🐺',
+        ],
+    },
+    marvel: {
+        title: 'MULTIVERSE ANOMALY',
+        lines: [
+            'My spidey-sense is tingling! 🕸',
+            '',
+            '"With great power, comes great responsibility."',
+            '',
+            'Your friendly neighborhood developer is here.',
+            '',
+            'THWIP! 🕷',
+        ],
+    },
 };
 
 const KONAMI = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
-const TEXT_TRIGGERS: Trigger[] = ['sudo', 'hack', 'matrix'];
+const TEXT_TRIGGERS: Trigger[] = ['sudo', 'hack', 'matrix', 'got', 'marvel'];
 
 const EasterEgg = () => {
     const [trigger, setTrigger] = useState<Trigger | null>(null);
