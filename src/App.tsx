@@ -8,12 +8,18 @@ import SkillNodeMap from './components/Skills/SkillNodeMap';
 import LogEntry from './components/Log/LogEntry';
 import TerminalForm from './components/Contact/TerminalForm';
 import Publication from './components/Publication/Publication';
+import CursorFollower from './components/UI/CursorFollower';
+import EasterEgg from './components/UI/EasterEgg';
+import ScrollReveal from './components/UI/ScrollReveal';
 
 const App = () => {
     const [isPaletteOpen, setIsPaletteOpen] = useState(false);
 
     return (
         <TerminalLayout>
+            <CursorFollower />
+            <EasterEgg />
+
             <CommandPalette isOpen={isPaletteOpen} setIsOpen={setIsPaletteOpen} />
 
             {/* Mobile Menu Trigger */}
@@ -26,16 +32,14 @@ const App = () => {
 
             <div className="flex flex-col gap-5 md:gap-5 pb-20">
                 <Hero />
-                <ProjectGrid />
-                <SkillNodeMap />
-                <LogEntry />
-                <Publication />
-                <TerminalForm />
+                <ScrollReveal><ProjectGrid /></ScrollReveal>
+                <ScrollReveal delay={0.05}><SkillNodeMap /></ScrollReveal>
+                <ScrollReveal delay={0.05}><LogEntry /></ScrollReveal>
+                <ScrollReveal delay={0.05}><Publication /></ScrollReveal>
+                <ScrollReveal delay={0.05}><TerminalForm /></ScrollReveal>
             </div>
         </TerminalLayout>
-    )
-}
+    );
+};
 
-
-
-export default App
+export default App;

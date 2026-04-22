@@ -139,21 +139,31 @@ const fadeUp = (delay: number) => ({
 const Hero = () => {
     const [line1, setLine1] = useState('');
     const [line2, setLine2] = useState('');
+    const [line3, setLine3] = useState('');
     const text1 = 'Initialising system sequence...';
     const text2 = 'User detected: Maulana Hamdani | Fullstack Developer';
+    const text3 = 'hint: the keyboard is listening...';
     const [showCursor, setShowCursor] = useState(true);
 
     useEffect(() => {
         const typeSequence = async () => {
             await new Promise(r => setTimeout(r, 1200));
+            // Type line 1
             for (let i = 0; i <= text1.length; i++) {
                 setLine1(text1.slice(0, i));
                 await new Promise(r => setTimeout(r, 30));
             }
             await new Promise(r => setTimeout(r, 300));
+            // Type line 2
             for (let i = 0; i <= text2.length; i++) {
                 setLine2(text2.slice(0, i));
                 await new Promise(r => setTimeout(r, 40));
+            }
+            await new Promise(r => setTimeout(r, 1000));
+            // Type line 3 (hint)
+            for (let i = 0; i <= text3.length; i++) {
+                setLine3(text3.slice(0, i));
+                await new Promise(r => setTimeout(r, 50));
             }
         };
         typeSequence();
@@ -165,7 +175,7 @@ const Hero = () => {
     }, []);
 
     return (
-        <section className="relative min-h-screen flex flex-col justify-center items-start overflow-hidden">
+        <section id="hero" className="relative min-h-screen flex flex-col justify-center items-start overflow-hidden">
 
             {/* Particle network */}
             <ParticleCanvas />
@@ -229,7 +239,8 @@ const Hero = () => {
                         <span className="text-[var(--color-olive)] mr-2">{'>'}</span>
                         {line1}
                     </div>
-                    <div className="flex flex-wrap items-center">
+
+                    <div className="mb-2 flex flex-wrap items-center">
                         {line1.length > 5 && (
                             <span className="text-[var(--color-olive)] mr-2">{'>'}</span>
                         )}
@@ -239,8 +250,19 @@ const Hero = () => {
                                 {line2.split('User detected: ')[1] || 'Maulana Hamdani | Fullstack Developer'}
                             </span>
                         )}
-                        <span className={`${showCursor ? 'opacity-100' : 'opacity-0'} ml-1 bg-[var(--color-olive)] inline-block h-[1.1em] w-2.5 align-middle`} />
+                        {/* Cursor moves here if line3 hasn't started yet */}
+                        {line2.length === text2.length && line3.length === 0 && (
+                            <span className={`${showCursor ? 'opacity-100' : 'opacity-0'} ml-1 bg-[var(--color-olive)] inline-block h-[1.1em] w-2.5 align-middle`} />
+                        )}
                     </div>
+
+                    {line3.length > 0 && (
+                        <div className="flex flex-wrap items-center opacity-60 text-sm md:text-base mt-4 pt-4 border-t border-[var(--color-olive)]/20">
+                            <span className="text-[var(--color-olive)] mr-2">{'>'}</span>
+                            <span className="mr-2">{line3}</span>
+                            <span className={`${showCursor ? 'opacity-100' : 'opacity-0'} ml-1 bg-[var(--color-olive)] inline-block h-[1.1em] w-2.5 align-middle`} />
+                        </div>
+                    )}
                 </motion.div>
 
                 {/* CTA */}
@@ -266,21 +288,7 @@ const Hero = () => {
             {/* Bottom fade */}
             <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[var(--color-charcoal)] to-transparent pointer-events-none" />
 
-            {/* Scroll indicator */}
-            <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 3.8, duration: 1 }}
-                className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-[var(--color-olive)] opacity-40"
-            >
-                <span className="font-mono text-[10px] tracking-widest uppercase">Scroll</span>
-                <motion.div
-                    animate={{ y: [0, 6, 0] }}
-                    transition={{ repeat: Infinity, duration: 1.4, ease: 'easeInOut' }}
-                >
-                    <ChevronDown size={16} />
-                </motion.div>
-            </motion.div>
+
         </section>
     );
 };

@@ -31,6 +31,19 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* Hide native cursor when custom cursor is active */
+body.custom-cursor,
+body.custom-cursor * {
+  cursor: none !important;
+}
+
+body.custom-cursor input,
+body.custom-cursor textarea,
+body.custom-cursor select {
+  cursor: text !important;
+}
+
+
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 10px;
@@ -236,11 +249,14 @@ body {
 
 /* CTA pulsing border glow */
 @keyframes cta-glow-pulse {
-  0%, 100% {
+
+  0%,
+  100% {
     box-shadow:
       0 0 8px rgba(112, 66, 20, 0.4),
       0 0 20px rgba(85, 107, 47, 0.2);
   }
+
   50% {
     box-shadow:
       0 0 16px rgba(112, 66, 20, 0.8),
